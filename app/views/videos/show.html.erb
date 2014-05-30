@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @video.name %></h1>
+<% unless @video.is_movie %>
+  <p><%= @video.show.name %></p>
+<% end %>
+
+<% if @video.is_watched %>
+  <p><strong><em>Watched</em></strong></p>
+<% end %>
+
+<p>
+  <strong>Bookmark:</strong>
+  <%= @video.bookmark || "None" %>
+</p>
+
+<%= video_tag @video.file, :size => "320x240", :controls => true %>
+
+<br>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', show_path(@video.show) %>

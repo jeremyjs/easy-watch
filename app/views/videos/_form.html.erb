@@ -1,0 +1,35 @@
+<%= form_for(@video) do |f| %>
+  <% if @video.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video.errors.count, "error") %> prohibited this video from being saved:</h2>
+
+      <ul>
+      <% @video.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+  </div>
+  <div class="form-group">
+    <%= f.label :show_id %><br>
+    <%= f.collection_select :show_id, Show.order(:name), :id, :name %><br>
+  </div>
+  <%= hidden_field_tag :user_id, current_user %>
+  <div class="form-group watched-field">
+    <%= f.label :is_watched, :hidden => 'true' %>
+    <%= f.check_box :is_watched %> Watched? <br>
+  </div>
+  <div class="form-group">
+    <%= f.label :file %><br>
+    <%= f.file_field :file %><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
